@@ -1,12 +1,29 @@
-$link-color: #02779E;
-$badge-color: #354250;
-$error-color: #C34444;
-$warning-color: #DFBA57;
-$success-color: #4AD964;
-$repo-link-color: #bbdde1;
+$white : #f2f2f2;
+$gray-500 : #8a8a92;
+$gray-700: #494952;
+$gray-800: #363640;
+$black: #26262e;
+$blue: #50a1f3;
+$purple: #bd43f5;
+$pink: #fc7b6d;
+$red: #ed4d4d;
+$orange: #eb683c;
+$yellow: #fdb23c;
+$green : #57c08b;
+$darkYellow: darken($yellow, 40%);
+$darkGreen: darken($green, 30%);
+$darkRed: darken($red, 40%);
+
+$link-color: $white;
+$badge-color: $gray-700;
+$error-color: $red;
+$warning-color: $yellow;
+$success-color: $green;
+$repo-link-color: $white;
+
 
 body {
-  background-color: #EEEEEE;
+  background-color: $gray-700;
   font-family: 'Open Sans', sans-serif;
   margin: 0;
 }
@@ -17,7 +34,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.6);;
+  background-color: rgba(255, 255, 255, 0.6);
   z-index: 100;
 
   display: flex;
@@ -26,8 +43,11 @@ body {
 }
 
 footer {
-  font-size: 0.8em;
+  font-style: italic;
+  font-size: 0.7rem;
   padding: 10px;
+  position: absolute;
+  bottom: 0;
 }
 
 #toolbar {
@@ -43,7 +63,8 @@ footer {
     margin-right: 5px;
   }
 
-  #auto-refresh, #sort-by-repo {
+  #auto-refresh,
+  #sort-by-repo {
     margin: 0 5px 0 5px;
   }
 
@@ -52,67 +73,74 @@ footer {
   }
 }
 
+.type {
+  padding: 1.5rem 0.5rem 0 0.5rem;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.goodjob {
+  font-size: 10rem;
+  color: white;
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 61%;
+  transform: translate(-50%, -50%);
+}
+
 .pull-request {
   align-items: center;
-  background-color: #FEFEFE;
-  border: 1px solid #CCCCCC;
-  border-radius: 5px;
+  background-color: $black;
   display: flex;
-  margin: 0.5rem;
+  margin: 0.3rem;
   padding: 0.5rem;
+  color: $white;
 
   img {
     vertical-align: middle;
   }
 
-  &.pull-request--mergeable {
-    background: #90C695;
-    border-left: 36px solid #509655;
+  .meta {
+    display: flex;
+  }
 
-    &:before {
-      color: #FFFFFF;
-      font-family: FontAwesome;
-      font-weight: normal;
-      font-style: normal;
-      display: inline-block;
-      text-decoration: inherit;
-      position: absolute;
-      margin-left: -34px;
-      content: "\f00c";
+  &.pull-request--mergeable {
+    background: $green;
+
+    a,
+    .pull-request-created {
+      color: $darkGreen;
+    }
+
+    .pull-request-last-updated {
+      background: $darkGreen;
     }
   }
 
   &.pull-request--unmergeable {
-    background: #D24D57;
-    border-left: 36px solid #A20D17;
+    background: $red;
 
-    &:before {
-      color: #FFFFFF;
-      font-family: FontAwesome;
-      font-weight: normal;
-      font-style: normal;
-      display: inline-block;
-      text-decoration: inherit;
-      position: absolute;
-      margin-left: -34px;
-      content: "\f071";
+    a,
+    .pull-request-created {
+      color: $darkRed;
+    }
+
+    .pull-request-last-updated {
+      background: $darkRed;
     }
   }
 
   &.pull-request--stale {
-    background: #F4C542;
-    border-left: 36px solid #E2E600;
+    background: $yellow;
 
-    &:before {
-      color: #FFFFFF;
-      font-family: FontAwesome;
-      font-weight: normal;
-      font-style: normal;
-      display: inline-block;
-      text-decoration: inherit;
-      position: absolute;
-      margin-left: -34px;
-      content: "\f071";
+    a,
+    .pull-request-created {
+      color: $darkYellow;
+    }
+
+    .pull-request-last-updated {
+      background: $darkYellow;
     }
   }
 
@@ -125,13 +153,14 @@ footer {
   }
 
   .pull-request-number {
-    color: #AAAAAA;
+    color: $gray-500;
     margin: 0 1rem;
   }
 
   .pull-request-created {
     font-style: italic;
     font-size: 0.8rem;
+    color: $gray-500;
   }
 
   .pull-request-last-updated {
@@ -139,45 +168,48 @@ footer {
     border-radius: 5px;
     padding: 0.5rem 1rem;
     color: #FFFFFF;
+    align-self: center;
   }
 
   .pr-status {
     display: inline-block;
-    margin-right: 1rem;    // Maintain spacing with the comments to the right
+    margin-right: 1rem; // Maintain spacing with the comments to the right
     margin-left: -0.75rem; // Nudge this closer to the PR number
 
     .success {
       color: $success-color;
     }
+
     .pending {
       color: $warning-color;
     }
-    .failure, .error {
+
+    .failure,
+    .error {
       color: $error-color;
     }
   }
 
   .pr-comments {
     display: inline-block;
+    margin-left: 1rem;
 
     div {
       display: inline-block;
       margin-right: 1rem;
     }
 
-    .pr-comment-count {
-
-    }
+    .pr-comment-count {}
 
     .pr-comment-positive {
       i {
-         color: green;
+        color: green;
       }
     }
 
     .pr-comment-negative {
       i {
-         color: red;
+        color: red;
       }
     }
   }
@@ -204,11 +236,10 @@ a {
 }
 
 button {
-  background-color: transparent;
+  background-color: $gray-700;
+  color: $white;
   padding: 0.5rem 1rem;
-  color: darken($link-color, 10%);
   border-radius: 5px;
-  border: 1px solid darken($link-color, 10%);
   font-size: 0.8rem;
   font-weight: bold;
   transition: all 0.25s ease 0s;
@@ -220,19 +251,13 @@ button {
   }
 
   &:hover {
-    $background: $link-color;
-    color: #FFFFFF;
     cursor: pointer;
-    background-color: $background;
-    border-color: darken($background, 10%);
+    background-color: $gray-500;
   }
 
   &:active {
-    $background: $link-color;
-    color: #FFFFFF;
     outline: none;
-    background-color: $background;
-    border-color: darken($background, 10%);
+    background-color: $gray-500;
   }
 
   &:disabled {
@@ -313,24 +338,67 @@ button {
   .repo-link {
     color: $repo-link-color;
     text-decoration: none;
+
     &:hover {
       color: lighten($repo-link-color, 10%);
     }
   }
 }
 
+.container {
+  display: flex;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 20%;
+  background-color: $gray-800;
+  margin-right: 1.5rem;
+  position: relative;
+
+  .reviewer {
+    display: flex;
+    padding: 1.4rem 2rem;
+    border-bottom: 1px solid $white;
+    color: $white;
+    align-items: center;
+  }
+
+  .requested {
+    margin-bottom: 3rem;
+  }
+
+  .count {
+    flex-grow: 1;
+    text-align: right;
+    font-size: 2rem;
+    margin: 0;
+  }
+}
+
+.main {
+  flex-grow: 1;
+}
+
 .container-header {
   padding: 0.5rem;
   display: flex;
   align-items: center;
-  background-color: #C4D2E6;
-  box-shadow: 1px 1px 1px #999999;
+  background-color: $white;
+  color: $black;
+
+  .hide {
+    display: none;
+  }
 
   h1 {
     margin: 0;
+    flex-grow: 1;
   }
 
-  #pr-count, #repo-count {
+  #pr-count,
+  #repo-count {
     font-size: 2em;
     margin-left: 0.5em;
 
@@ -359,7 +427,8 @@ button {
     padding: 0.5em;
   }
 
-  #positiveMerge, #negativeMerge {
+  #positiveMerge,
+  #negativeMerge {
     width: 4em;
   }
 
