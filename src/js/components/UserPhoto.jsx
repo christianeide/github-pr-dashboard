@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function UserPhoto(props) {
-  const url = props.user.avatarUrl;
+  const url = props.user.avatarUrl || '/images/default_image.png';
   const username = props.user.username;
   const size = props.size;
   const profileUrl = props.user.profileUrl;

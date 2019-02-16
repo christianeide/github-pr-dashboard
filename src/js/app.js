@@ -13,6 +13,7 @@ import configureStore from './store';
 
 import '../css/main.scss';
 import '../images/favicon.ico';
+import '../images/default_image.png';
 
 const store = configureStore();
 
