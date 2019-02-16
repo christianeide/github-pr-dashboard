@@ -2,11 +2,11 @@
 
 See pull requests at a glance, across multiple repos
 
-This is a edited version from the original `https://www.github.com/joeattardi/github-pr-dashboard`.
+This is a edited version of the original `https://www.github.com/joeattardi/github-pr-dashboard`.
 
-This version focus on whos asked for a review on a pull requets. It will also sort the pull requets by repository.
+This fork focus on reviewers on a pull requets. It will also sort the pull requets by repository.
 
-Pull requests with a requested changes will be marked as red. Stale pulls is also validated against last change, not when they were opened.
+Pull requests with requested changes will be marked as red. Stale pull requests is validated against last change, not when they were opened.
 
 This fork also have som designchanges to the dashboard as well as updating some of the NPM-packages.
 
