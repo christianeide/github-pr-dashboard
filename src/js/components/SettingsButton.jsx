@@ -10,7 +10,7 @@ function SettingsButton({ history }) {
       title="Settings"
       onClick={() => history.push('/settings')}
     >
-      <i className="fa fa-lg fa-gear"></i>
+      <i className="fas fa-lg fa-cog"></i>
     </button>
   );
 }
