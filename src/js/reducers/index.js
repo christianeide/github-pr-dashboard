@@ -1,4 +1,6 @@
-import { ActionTypes } from '../actions';
+import {
+  ActionTypes
+} from '../actions';
 
 export function loadingReducer(state = false, action) {
   switch (action.type) {
@@ -32,14 +34,14 @@ export function reposReducer(state = [], action) {
 
 function sortPullRequests(pullRequests, sortByRepo, orderBy = 'updated') {
   return [...pullRequests].sort((a, b) => {
-    if (sortByRepo) {
-      if (a.repoUrl < b.repoUrl) {
-        return 1;
-      }
-      if (a.repoUrl > b.repoUrl) {
-        return -1;
-      }
+    // if (sortByRepo) {
+    if (a.repoUrl > b.repoUrl) {
+      return 1;
     }
+    if (a.repoUrl < b.repoUrl) {
+      return -1;
+    }
+    // }
 
     if (a[orderBy] < b[orderBy]) {
       return 1;
@@ -63,8 +65,7 @@ export function pullRequestsReducer(state = [], action) {
     case ActionTypes.UPDATE_PULL_REQUEST:
       return state.map(pullRequest => {
         if (pullRequest.id === action.pullRequest.id) {
-          return Object.assign(
-            {},
+          return Object.assign({},
             pullRequest,
             action.pullRequest
           );
@@ -95,7 +96,10 @@ export function errorReducer(state = '', action) {
   }
 }
 
-export function sortOptionsReducer(state = { sortByRepo: false, orderBy: 'updated' }, action) {
+export function sortOptionsReducer(state = {
+  sortByRepo: false,
+  orderBy: 'updated'
+}, action) {
   switch (action.type) {
     case ActionTypes.SORT:
       return action.sortOptions;
