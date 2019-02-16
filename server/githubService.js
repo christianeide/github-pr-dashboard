@@ -6,18 +6,20 @@ const reviews = require('./reviews');
 
 function apiCall(url, headers = {}) {
   const config = configManager.getConfig();
-  const options = { headers };
+  const options = {
+    headers
+  };
   if (config.username && config.password) {
     options.auth = {
       username: config.username,
       password: config.password
     }
-  } else if (config.token ) {
+  } else if (config.token) {
     options.auth = {
-      username: config.token 
+      username: config.token
     }
   };
-  
+
   return axios.get(url, options);
 }
 
@@ -47,7 +49,9 @@ function getPullRequests(repos) {
       created: pr.created_at,
       updated: pr.updated_at,
       comments_url: pr.comments_url,
-      statuses_url: pr.statuses_url
+      statuses_url: pr.statuses_url,
+      requested_reviewers: pr.requested_reviewers,
+      requested_teams: pr.requested_teams
     }));
   });
 }
@@ -109,7 +113,7 @@ function prIsStale(pr) {
   if (staleHours > 0) {
     const hoursBack = currentDate.getHours() - staleHours;
     const previousDate = currentDate.setHours(hoursBack);
-    return new Date(pr.created).getTime() < previousDate;
+    return new Date(pr.updated).getTime() < previousDate;
   }
   return false;
 }
@@ -124,34 +128,40 @@ exports.loadPullRequests = function loadPullRequests() {
   const repos = config.repos;
 
   return getPullRequests(repos).then(prs => {
-    const commentsPromises = prs.map(pr => getPullRequestComments(pr));
-    return Promise.all(commentsPromises).then(() => prs);
-  })
-  .then(prs => {
-    const reactionsPromises = prs.map(pr => getPullRequestReactions(pr));
-    return Promise.all(reactionsPromises).then(() => prs);
-  })
-  .then(prs => {
-    const reviewPromises = prs.map(pr => getPullRequestReviews(pr));
-    return Promise.all(reviewPromises).then(() => prs);
-  })
-  .then(prs => {
-    const statusPromises = prs.map(pr => getPullRequestStatus(pr));
-    return Promise.all(statusPromises).then(() => {
-      prs.sort((p1, p2) => new Date(p2.updated).getTime() - new Date(p1.updated).getTime());
-      if (configManager.hasMergeRules()) {
-        prs.forEach(pr => {
-          if (config.mergeRule.neverRegexp && configManager.getNeverMergeRegexp().test(pr.title)) {
-            pr.unmergeable = true;
-          } else if (pr.positiveComments >= config.mergeRule.positive &&
-            pr.negativeComments <= config.mergeRule.negative) {
-            pr.mergeable = true;
-          } else if (prIsStale(pr)) {
-            pr.stale = true;
-          }
-        });
-      }
-      return prs;
+      const commentsPromises = prs.map(pr => getPullRequestComments(pr));
+      return Promise.all(commentsPromises).then(() => prs);
+    })
+    .then(prs => {
+      const reactionsPromises = prs.map(pr => getPullRequestReactions(pr));
+      return Promise.all(reactionsPromises).then(() => prs);
+    })
+    .then(prs => {
+      const reviewPromises = prs.map(pr => getPullRequestReviews(pr));
+      return Promise.all(reviewPromises).then(() => prs);
+    })
+    .then(prs => {
+      const statusPromises = prs.map(pr => getPullRequestStatus(pr));
+      return Promise.all(statusPromises).then(() => {
+        prs.sort((p1, p2) => new Date(p2.updated).getTime() - new Date(p1.updated).getTime());
+        if (configManager.hasMergeRules()) {
+          prs.forEach(pr => {
+            if (config.mergeRule.neverRegexp && configManager.getNeverMergeRegexp().test(pr.title)) {
+              pr.unmergeable = true;
+            } else if (pr.negativeComments >= config.mergeRule.negative) {
+              if (pr.negativeComments >= pr.positiveComments) {
+                pr.unmergeable = true;
+              } else {
+                pr.mergeable = true;
+              }
+            } else if (pr.positiveComments >= config.mergeRule.positive &&
+              pr.negativeComments <= config.mergeRule.negative) {
+              pr.mergeable = true;
+            } else if (prIsStale(pr)) {
+              pr.stale = true;
+            }
+          });
+        }
+        return prs;
+      });
     });
-  });
 };
