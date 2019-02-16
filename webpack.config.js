@@ -51,7 +51,7 @@ module.exports = {
         loader: 'babel-loader'
       },
       {
-        test: /\.svg|\.ico$/,
+        test: /\.svg|\.ico|\.png$/,
         loader: 'file-loader?name=[name].[ext]&outputPath=images/'
       }
     ]
