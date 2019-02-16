@@ -6,7 +6,6 @@ import '../../images/git-pull-request.svg';
 
 import UserPhoto from './UserPhoto';
 import { Comments } from './Comments';
-import { Status } from './Status';
 
 const CLASS_BASE = 'pull-request';
 const CLASS_UNMERGEABLE = `${CLASS_BASE} ${CLASS_BASE}--unmergeable`;
@@ -35,6 +34,20 @@ export default class PullRequest extends React.Component {
     return `${header} ${moment(date).format('MMMM Do YYYY, h:mm:ss a')}`;
   }
 
+  requestedReviewers(pr) {
+    if (pr.mergeable) return null;
+    const reviewers = pr.requested_reviewers.concat(pr.requested_teams);
+    return reviewers.map(reviewer => {
+      const user = {
+        username: reviewer.login || `Team:  ${reviewer.name}`,
+        profileUrl: reviewer.html_url,
+        avatarUrl: reviewer.avatar_url
+      };
+
+      return <UserPhoto size={50} user={user} key={reviewer.id} />;
+    });
+  }
+
   render() {
     const pr = this.props.pullRequest;
     const className = getPrClassName(pr);
@@ -44,18 +57,12 @@ export default class PullRequest extends React.Component {
         <UserPhoto size={50} user={pr.user} />
         <div className="pull-request-info">
           <div className="pull-request-title">
-            <img src="images/git-pull-request.svg" alt="Pull request" />
-            &nbsp;
-            <a target="_blank" href={pr.url}>{pr.title}</a>
-          </div>
-          <div>
-            <a target="_blank" href={pr.repoUrl}>
-              <img src="images/repo.svg" alt="Repository" /> {pr.repo}
+            <a target="_blank" href={pr.url}>
+              #{pr.number}: {pr.title}
             </a>
-            <span className="pull-request-number">#{pr.number}</span>
-            <Status
-              status={pr.status}
-            />
+          </div>
+          <div className="pull-request-created" title={this.formatTime('Created', pr.created)}>
+            Opened by {pr.user.username} {this.formatRelativeTime(pr.created)}
             <Comments
               comments={pr.comments}
               positiveCommentCount={pr.positiveComments}
@@ -63,15 +70,15 @@ export default class PullRequest extends React.Component {
               reactions={pr.reactions}
             />
           </div>
-          <div className="pull-request-created" title={this.formatTime('Created', pr.created)}>
-            Opened by {pr.user.username} {this.formatRelativeTime(pr.created)}
-          </div>
         </div>
-        <div
-          className="pull-request-last-updated"
-          title={this.formatTime('Last updated', pr.updated)}
-        >
-          {this.formatRelativeTime(pr.updated)}
+        <div className="meta">
+          {this.requestedReviewers(pr)}
+          <div
+            className="pull-request-last-updated"
+            title={this.formatTime('Last updated', pr.updated)}
+          >
+            {this.formatRelativeTime(pr.updated)}
+          </div>
         </div>
       </div>
     );
