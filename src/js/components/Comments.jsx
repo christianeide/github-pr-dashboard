@@ -15,26 +15,26 @@ function translateReaction(reaction) {
 function renderCommentCount(comments) {
   return (
     <div className="pr-comment-count" title={`${comments} comments`}>
-      <i className="fa fa-comment-o"></i> {comments}
+      <i className="fas fa-comment-dots"></i> {comments}
     </div>
   );
 }
 
-function renderPositiveComments(comments) {
-  return (
-    <div className="pr-comment-positive" title={`${comments} positive comments`}>
-      <i className="fa fa-thumbs-o-up"></i> {comments}
-    </div>
-  );
-}
+// function renderPositiveComments(comments) {
+//   return (
+//     <div className="pr-comment-positive" title={`${comments} positive comments`}>
+//       <i className="fas fa-thumbs-o-up"></i> {comments}
+//     </div>
+//   );
+// }
 
-function renderNegativeComments(comments) {
-  return (
-    <div className="pr-comment-negative" title={`${comments} negative comments`}>
-      <i className="fa fa-thumbs-o-down"></i> {comments}
-    </div>
-  );
-}
+// function renderNegativeComments(comments) {
+//   return (
+//     <div className="pr-comment-negative" title={`${comments} negative comments`}>
+//       <i className="fas fa-thumbs-o-down"></i> {comments}
+//     </div>
+//   );
+// }
 
 function renderOtherReactions(reactions) {
   const reactionCounts = {};
@@ -78,9 +78,9 @@ export function Comments(props) {
   return (
     <div className="pr-comments">
       {renderCommentCount(count)}
-      {renderPositiveComments(props.positiveCommentCount)}
-      {renderNegativeComments(props.negativeCommentCount)}
-      {renderOtherReactions(reactions)}
+      {/* {renderPositiveComments(props.positiveCommentCount)} */}
+      {/* {renderNegativeComments(props.negativeCommentCount)} */}
+      {/* {renderOtherReactions(reactions)} */}
     </div>
   );
 }
