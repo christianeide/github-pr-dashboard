@@ -9,7 +9,7 @@ export default function RefreshButton(props) {
       onClick={props.onRefresh}
       title="Refresh"
     >
-      <i className="fa fa-lg fa-refresh"></i>
+      <i className="fas fa-lg fa-sync-alt"></i>
     </button>
   );
 }
