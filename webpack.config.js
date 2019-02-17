@@ -8,13 +8,12 @@ module.exports = {
   ],
 
   output: {
-    path: './dist',
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
 
   resolve: {
-    root: __dirname,
-    extensions: ['', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx']
   },
 
   devtool: 'cheap-source-map',
@@ -24,37 +23,53 @@ module.exports = {
   },
 
   module: {
-    preLoaders: [
-      {
-        test: /\.jsx?$/,
-        loader: 'eslint',
-        include: [path.resolve(__dirname, 'src')]
-      }
-    ],
+    // preLoaders: [
+    //   {
+    //     test: /\.jsx?$/,
+    //     loader: 'eslint',
+    //     include: [path.resolve(__dirname, 'src')]
+    //   }
+    // ],
 
-    loaders: [
-      {
+    rules: [{
         test: /\.css$/,
-        loaders: ['style', 'css']
+        use: [{
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          }
+        ]
       },
       {
         test: /\.scss$/,
-        loaders: ['style', 'css', 'sass']
+        use: [{
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
       },
       {
         test: /\.json$/,
-        loader: 'json-loader'
+        use: ['json-loader']
       },
+
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        use: ['babel-loader']
       },
       {
         test: /\.svg|\.ico|\.png$/,
-        loader: 'file-loader?name=[name].[ext]&outputPath=images/'
+        use: 'file-loader?name=[name].[ext]&outputPath=images/'
       }
     ]
+
   },
 
   plugins: [
