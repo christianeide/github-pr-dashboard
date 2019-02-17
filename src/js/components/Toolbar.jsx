@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { refresh, loadPullRequests } from '../actions';
 import RefreshButton from './RefreshButton';
@@ -32,9 +33,9 @@ class Toolbar extends React.Component {
 }
 
 Toolbar.propTypes = {
-  refresh: React.PropTypes.func.isRequired,
-  failedRepos: React.PropTypes.array.isRequired,
-  repos: React.PropTypes.array.isRequired
+  refresh: PropTypes.func.isRequired,
+  failedRepos: PropTypes.array.isRequired,
+  repos: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) { return state; }

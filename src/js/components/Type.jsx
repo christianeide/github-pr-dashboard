@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Type = (props) => (
   <div className="type">
@@ -11,5 +12,5 @@ const Type = (props) => (
 export default Type;
 
 Type.propTypes = {
-  pullRequest: React.PropTypes.object.isRequired
+  pullRequest: PropTypes.object.isRequired
 };

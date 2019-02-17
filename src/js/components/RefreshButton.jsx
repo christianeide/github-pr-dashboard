@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function RefreshButton(props) {
   return (
@@ -15,5 +16,5 @@ export default function RefreshButton(props) {
 }
 
 RefreshButton.propTypes = {
-  onRefresh: React.PropTypes.func.isRequired
+  onRefresh: PropTypes.func.isRequired
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 import '../../images/repo.svg';
 import '../../images/git-pull-request.svg';
@@ -86,5 +87,5 @@ export default class PullRequest extends React.Component {
 }
 
 PullRequest.propTypes = {
-  pullRequest: React.PropTypes.object.isRequired
+  pullRequest: PropTypes.object.isRequired
 };

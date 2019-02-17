@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 export default class RepoIndicator extends React.Component {
 
@@ -55,6 +56,6 @@ export default class RepoIndicator extends React.Component {
 }
 
 RepoIndicator.propTypes = {
-  pullRequest: React.PropTypes.object.isRequired,
-  show: React.PropTypes.bool.isRequired
+  pullRequest: PropTypes.object.isRequired,
+  show: PropTypes.bool.isRequired
 };

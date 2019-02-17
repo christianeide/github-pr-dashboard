@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../css/loadingIndicator.css';
+import PropTypes from 'prop-types';
 
 export default function LoadingIndicator(props) {
   const style = {
@@ -26,7 +27,7 @@ export default function LoadingIndicator(props) {
 }
 
 LoadingIndicator.propTypes = {
-  size: React.PropTypes.number
+  size: PropTypes.number
 };
 
 LoadingIndicator.defaultProps = {

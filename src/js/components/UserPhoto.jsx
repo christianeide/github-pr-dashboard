@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function UserPhoto(props) {
   const url = props.user.avatarUrl || '/images/default_image.png';
@@ -18,8 +19,8 @@ export default function UserPhoto(props) {
 }
 
 UserPhoto.propTypes = {
-  user: React.PropTypes.object,
-  size: React.PropTypes.number
+  user: PropTypes.object,
+  size: PropTypes.number
 };
 
 UserPhoto.defaultProps = {

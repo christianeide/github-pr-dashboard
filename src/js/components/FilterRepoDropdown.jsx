@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class FilterRepoDropdown extends React.Component {
   constructor(props) {
@@ -48,7 +49,7 @@ export default class FilterRepoDropdown extends React.Component {
 }
 
 FilterRepoDropdown.propTypes = {
-  failedRepos: React.PropTypes.array,
-  onRefresh: React.PropTypes.func.isRequired,
-  allRepos: React.PropTypes.array
+  failedRepos: PropTypes.array,
+  onRefresh: PropTypes.func.isRequired,
+  allRepos: PropTypes.array
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import emoji from 'emojione';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 function translateReaction(reaction) {
   const translationMap = {
@@ -86,8 +87,8 @@ export function Comments(props) {
 }
 
 Comments.propTypes = {
-  positiveCommentCount: React.PropTypes.number,
-  negativeCommentCount: React.PropTypes.number,
-  comments: React.PropTypes.array,
-  reactions: React.PropTypes.array
+  positiveCommentCount: PropTypes.number,
+  negativeCommentCount: PropTypes.number,
+  comments: PropTypes.array,
+  reactions: PropTypes.array
 };

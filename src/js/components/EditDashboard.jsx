@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { refresh, loadPullRequests } from '../actions';
+import PropTypes from 'prop-types';
 
 import AddRepo from './AddRepo';
 import EmojiList from './EmojiList';
@@ -228,8 +229,8 @@ class EditDashboard extends React.Component {
 }
 
 EditDashboard.propTypes = {
-  history: React.PropTypes.object.isRequired,
-  refresh: React.PropTypes.func.isRequired
+  history: PropTypes.object.isRequired,
+  refresh: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) { return state; }

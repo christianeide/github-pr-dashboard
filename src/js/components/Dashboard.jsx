@@ -7,6 +7,7 @@ import Toolbar from './Toolbar';
 import Footer from './Footer';
 import Type from './Type';
 import UserPhoto from './UserPhoto';
+import PropTypes from 'prop-types';
 
 class Main extends React.Component {
   getRepos(pullRequests) {
@@ -156,12 +157,12 @@ class Main extends React.Component {
 }
 
 Main.propTypes = {
-  loading: React.PropTypes.bool.isRequired,
-  pullRequests: React.PropTypes.array.isRequired,
-  repos: React.PropTypes.array.isRequired,
-  title: React.PropTypes.string.isRequired,
-  failedRepos: React.PropTypes.array.isRequired,
-  error: React.PropTypes.string.isRequired
+  loading: PropTypes.bool.isRequired,
+  pullRequests: PropTypes.array.isRequired,
+  repos: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+  failedRepos: PropTypes.array.isRequired,
+  error: PropTypes.string.isRequired
 };
 
 export default connect(state => state)(Main);

@@ -2,6 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions';
+import PropTypes from 'prop-types';
 
 class SortControl extends React.Component {
   constructor(props) {
@@ -57,8 +58,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 SortControl.propTypes = {
-  sortOptions: React.PropTypes.any,
-  actions: React.PropTypes.object
+  sortOptions: PropTypes.any,
+  actions: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SortControl);

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const AUTO_REFRESH_ENABLED = 'autoRefreshEnabled';
 const AUTO_REFRESH_TIME = 'autoRefreshTime';
@@ -92,5 +93,5 @@ export default class AutoRefreshControl extends React.Component {
 }
 
 AutoRefreshControl.propTypes = {
-  onRefresh: React.PropTypes.func.isRequired
+  onRefresh: PropTypes.func.isRequired
 };

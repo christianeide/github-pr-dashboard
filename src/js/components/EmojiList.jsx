@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 export default class EmojiList extends React.Component {
   constructor(props) {
     super(props);
@@ -74,7 +74,7 @@ export default class EmojiList extends React.Component {
 }
 
 EmojiList.propTypes = {
-  emojis: React.PropTypes.array.isRequired,
-  onAdd: React.PropTypes.func.isRequired,
-  onRemove: React.PropTypes.func.isRequired
+  emojis: PropTypes.array.isRequired,
+  onAdd: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired
 };

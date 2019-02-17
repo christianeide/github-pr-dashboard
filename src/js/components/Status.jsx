@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ICONS = {
   success: 'check-circle',
@@ -20,5 +21,5 @@ export function Status(props) {
 }
 
 Status.propTypes = {
-  status: React.PropTypes.object,
+  status: PropTypes.object,
 };

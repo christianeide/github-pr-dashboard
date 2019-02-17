@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 export default class AddRepo extends React.Component {
   constructor(props) {
@@ -100,6 +101,6 @@ export default class AddRepo extends React.Component {
 }
 
 AddRepo.propTypes = {
-  repos: React.PropTypes.array.isRequired,
-  onAddRepo: React.PropTypes.func.isRequired
+  repos: PropTypes.array.isRequired,
+  onAddRepo: PropTypes.func.isRequired
 };
